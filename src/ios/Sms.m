@@ -9,6 +9,20 @@
     return self;
 }
 
+- (void)check:(CDVInvokedUrlCommand*)command {
+    self.callbackID = command.callbackId;
+    if(![MFMessageComposeViewController canSendText]) {
+        [super writeJavascript:[[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                                  messageAsString:@"SMS Text not available."]
+                                            toErrorCallbackString:self.callbackID]];
+    } else {
+        [super writeJavascript:[[CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                                  messageAsString:@"SMS Text available."]
+                                          toSuccessCallbackString:self.callbackID]];
+    }
+}
+
+
 - (void)send:(CDVInvokedUrlCommand*)command {
     
     self.callbackID = command.callbackId;

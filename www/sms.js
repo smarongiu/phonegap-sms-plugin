@@ -1,4 +1,5 @@
 var sms = {
+
   send: function(phone, message, method, success, failure) {
     phone = sms.convertPhoneToArray(phone);
 
@@ -8,6 +9,17 @@ var sms = {
       'Sms',
       'send',
       [phone, message, method]
+    );
+  },
+
+
+  check: function(success, failure) {
+    cordova.exec(
+      success,
+      failure,
+      'Sms',
+      'check',
+      []
     );
   },
 

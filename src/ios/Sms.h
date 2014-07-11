@@ -9,5 +9,6 @@
 @property(strong) NSString* callbackID;
 
 - (void)send:(CDVInvokedUrlCommand*)command;
+- (void)check:(CDVInvokedUrlCommand*)command;
 
 @end

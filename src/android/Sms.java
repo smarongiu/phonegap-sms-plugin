@@ -20,6 +20,7 @@ import org.json.JSONException;
 
 public class Sms extends CordovaPlugin {
   public final String ACTION_SEND_SMS = "send";
+  public final String ACTION_CHECK = "check";
   private static final String INTENT_FILTER_SMS_SENT = "SMS_SENT";
 
   BroadcastReceiver receiver;
@@ -65,6 +66,10 @@ public class Sms extends CordovaPlugin {
       } catch (JSONException ex) {
         callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.JSON_EXCEPTION));
       }
+    } else if (action.equals(ACTION_CHECK)) {
+      boolean chk = checkSupport();
+      callbackContext.sendPluginResult(new PluginResult(chk ? PluginResult.Status.OK : PluginResult.Status.ERROR));
+      return true;
     }
     return false;
   }
